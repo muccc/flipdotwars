@@ -2,11 +2,11 @@ require_relative "lib/charset"
 require_relative "lib/display"
 require_relative "lib/movie"
 
-require "pry"
+#require "pry"
 
-DISPLAY_IPS = %w(2001:67C:20A1:1095:C49D:E22D:6891:DCD 2001:67C:20A1:1095:34B1:6957:8DDB:3A79  2001:67C:20A1:1095:552A:1594:871F:D9C2)
+DISPLAY_IPS = %w(2001:7f0:3003:235e:ba27:ebff:fee3:ff77)
 DISPLAY_PORT = 2323
-DELAY        = 0.55 # Delay (in seconds) between sending the frames
+DELAY        = 0.2 # Delay (in seconds) between sending the frames
 
 @current_frame = ARGV[0].to_i || 0
 
@@ -23,7 +23,7 @@ end
 
 while @current_frame < movie.frames.length
   frame = movie.frames[@current_frame.to_i]
-  converted_frame = frame.map{ |line| charset.convert(line) }.flatten
+  converted_frame = frame.map{ |line| charset.convert(line) }.flatten  
   display.show(converted_frame)
   print "\e[2J\e[f"
   puts converted_frame

@@ -1,8 +1,8 @@
 require "socket"
 
 class Display
-  PANEL_WIDTH = 48
-  NUM_PANELS  = 3
+  PANEL_WIDTH = 144
+  NUM_PANELS  = 1
   TOTAL_WIDTH = PANEL_WIDTH * NUM_PANELS
   HEIGHT      = 120
   
@@ -20,9 +20,9 @@ class Display
     frame = pad_frame(frame)
     bytes = [[], [], []]
     NUM_PANELS.times do |panel|
-      PANEL_WIDTH.times do |col|
+      HEIGHT.times do |row|
         byte = ""
-        (HEIGHT - 1).downto(0).each do |row|
+		  PANEL_WIDTH.times do |col|
           byte += frame[row][panel * PANEL_WIDTH + col] != " " ? "1" : "0"
           if byte.length == 8
             bytes[panel] << byte.to_i(2)
